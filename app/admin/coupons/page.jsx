@@ -25,19 +25,40 @@ export default function AdminCoupons() {
 
     const handleAddCoupon = async (e) => {
         e.preventDefault()
-        // Logic to add a coupon
+        const couponToAdd = {
+            ...newCoupon,
+            discount: Number(newCoupon.discount),
+            expiresAt: new Date(newCoupon.expiresAt).toISOString(),
+            createdAt: new Date().toISOString(),
+        }
 
+        if (coupons.some((coupon) => coupon.code === couponToAdd.code)) {
+            throw new Error('Coupon code already exists')
+        }
 
+        setCoupons((prev) => [couponToAdd, ...prev])
+        setNewCoupon({
+            code: '',
+            description: '',
+            discount: '',
+            forNewUser: false,
+            forMember: false,
+            isPublic: false,
+            expiresAt: new Date()
+        })
     }
 
     const handleChange = (e) => {
-        setNewCoupon({ ...newCoupon, [e.target.name]: e.target.value })
+        const { name, value, type, checked } = e.target
+        if (type === 'checkbox') {
+            setNewCoupon({ ...newCoupon, [name]: checked })
+        } else {
+            setNewCoupon({ ...newCoupon, [name]: value })
+        }
     }
 
     const deleteCoupon = async (code) => {
-        // Logic to delete a coupon
-
-
+        setCoupons((prev) => prev.filter((coupon) => coupon.code !== code))
     }
 
     useEffect(() => {

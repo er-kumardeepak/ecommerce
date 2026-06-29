@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from "next/navigation"
-import { HomeIcon, ShieldCheckIcon, StoreIcon, TicketPercentIcon } from "lucide-react"
+import { HomeIcon, ShieldCheckIcon, StoreIcon, TicketPercentIcon, UsersIcon, BarChart3Icon, PackageIcon, LayersIcon, TagIcon, ShoppingBagIcon, RefreshCcwIcon, DollarSignIcon, SettingsIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { assets } from "@/assets/assets"
@@ -12,9 +12,20 @@ const AdminSidebar = () => {
 
     const sidebarLinks = [
         { name: 'Dashboard', href: '/admin', icon: HomeIcon },
-        { name: 'Stores', href: '/admin/stores', icon: StoreIcon },
+        { name: 'Products', href: '/admin/products', icon: ShoppingBagIcon },
+        { name: 'Categories', href: '/admin/categories', icon: LayersIcon },
+        { name: 'Brands', href: '/admin/brands', icon: TagIcon },
+        { name: 'Orders', href: '/admin/orders', icon: PackageIcon },
+        { name: 'Returns', href: '/admin/returns', icon: RefreshCcwIcon },
+        { name: 'Refunds', href: '/admin/refunds', icon: RefreshCcwIcon },
+        { name: 'Customers', href: '/admin/customers', icon: UsersIcon },
+        { name: 'Sellers', href: '/admin/sellers', icon: StoreIcon },
+        { name: 'Inventory', href: '/admin/inventory', icon: PackageIcon },
+        { name: 'Payments', href: '/admin/payments', icon: DollarSignIcon },
+        { name: 'Coupons', href: '/admin/coupons', icon: TicketPercentIcon },
+        { name: 'Reports', href: '/admin/reports', icon: BarChart3Icon },
+        { name: 'Settings', href: '/admin/settings', icon: SettingsIcon },
         { name: 'Approve Store', href: '/admin/approve', icon: ShieldCheckIcon },
-        { name: 'Coupons', href: '/admin/coupons', icon: TicketPercentIcon  },
     ]
 
     return (

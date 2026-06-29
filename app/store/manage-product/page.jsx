@@ -3,28 +3,29 @@ import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import Image from "next/image"
 import Loading from "@/components/Loading"
-import { productDummyData } from "@/assets/assets"
+import { getSellerProducts, updateSellerProduct } from "@/lib/sellerData"
 
 export default function StoreManageProducts() {
-
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
     const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
 
     const fetchProducts = async () => {
-        setProducts(productDummyData)
+        setProducts(getSellerProducts())
         setLoading(false)
     }
 
     const toggleStock = async (productId) => {
-        // Logic to toggle the stock of a product
+        const product = products.find((item) => item.id === productId)
+        if (!product) return
 
-
+        const updatedProducts = updateSellerProduct(productId, { inStock: !product.inStock })
+        setProducts(updatedProducts)
     }
 
     useEffect(() => {
-            fetchProducts()
+        fetchProducts()
     }, [])
 
     if (loading) return <Loading />
@@ -47,13 +48,13 @@ export default function StoreManageProducts() {
                         <tr key={product.id} className="border-t border-gray-200 hover:bg-gray-50">
                             <td className="px-4 py-3">
                                 <div className="flex gap-2 items-center">
-                                    <Image width={40} height={40} className='p-1 shadow rounded cursor-pointer' src={product.images[0]} alt="" />
+                                    <Image width={40} height={40} className='p-1 shadow rounded cursor-pointer' src={product.images?.[0] || ""} alt="" />
                                     {product.name}
                                 </div>
                             </td>
                             <td className="px-4 py-3 max-w-md text-slate-600 hidden md:table-cell truncate">{product.description}</td>
-                            <td className="px-4 py-3 hidden md:table-cell">{currency} {product.mrp.toLocaleString()}</td>
-                            <td className="px-4 py-3">{currency} {product.price.toLocaleString()}</td>
+                            <td className="px-4 py-3 hidden md:table-cell">{currency} {Number(product.mrp || 0).toLocaleString()}</td>
+                            <td className="px-4 py-3">{currency} {Number(product.price || 0).toLocaleString()}</td>
                             <td className="px-4 py-3 text-center">
                                 <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
                                     <input type="checkbox" className="sr-only peer" onChange={() => toast.promise(toggleStock(product.id), { loading: "Updating data..." })} checked={product.inStock} />

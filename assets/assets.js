@@ -360,10 +360,24 @@ export const storesDummyData = [
 ]
 
 export const dummyAdminDashboardData = {
-    "orders": 6,
-    "stores": 2,
-    "products": 12,
-    "revenue": "959.10",
+    "orders": 124,
+    "stores": 12,
+    "products": 324,
+    "revenue": "48,760.50",
+    "todayRevenue": "3,212.40",
+    "todayOrders": 28,
+    "monthlyRevenue": "42,600.90",
+    "pendingOrders": 8,
+    "cancelledOrders": 2,
+    "refundRequests": 3,
+    "newCustomers": 15,
+    "activeSellers": 42,
+    "lowStockProducts": 7,
+    "outOfStockProducts": 4,
+    "pendingStoreApproval": 1,
+    "pendingWithdrawals": 5,
+    "averageOrderValue": "$145.20",
+    "conversionRate": "4.8%",
     "allOrders": [
         { "createdAt": "2025-08-20T08:46:58.239Z", "total": 145.6 },
         { "createdAt": "2025-08-22T08:46:21.818Z", "total": 97.2 },

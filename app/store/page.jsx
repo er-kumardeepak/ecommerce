@@ -1,13 +1,12 @@
 'use client'
-import { dummyStoreDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StarIcon, TagsIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { getSellerDashboardData } from "@/lib/sellerData"
 
 export default function Dashboard() {
-
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
     const router = useRouter()
@@ -28,7 +27,7 @@ export default function Dashboard() {
     ]
 
     const fetchDashboardData = async () => {
-        setDashboardData(dummyStoreDashboardData)
+        setDashboardData(getSellerDashboardData())
         setLoading(false)
     }
 
